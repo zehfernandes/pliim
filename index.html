@@ -27,7 +27,7 @@
                 <p class="tagline">One click and be ready to go up on stage and shine!</p>
                 <p class="download">
                     <!-- href="https://github.com/zehfernandes/pliim/releases/latest" -->
-                    <a href="https://www.dropbox.com/sh/8mumnlxcfgr17a7/AADdNTWK3c-dtg8K2fnOBE6Za?dl=1" onClick="gtag('event', 'download')" title="Download Pliim">
+                    <a id="downloadButton" href="https://www.dropbox.com/sh/8mumnlxcfgr17a7/AADdNTWK3c-dtg8K2fnOBE6Za?dl=1" onClick="gtag('event', 'download')" title="Download Pliim">
                         <?xml version="1.0" encoding="UTF-8"?>
                         <svg id="button" width="259px" height="83px" viewBox="0 0 259 83" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -48,7 +48,7 @@
                         </svg>
                     </a>
                 </p>
-                <p class="mt3 f5 pb4" style="color: #C1BAC9">or use a <a href="https://gist.github.com/zehfernandes/427c19c8e7a2672a1d465606910bf679" target="_blank">lite version</a></p>
+                <p class="mt3 f5 pb4" style="color: #C1BAC9">or use a <a id="liteVersion" href="https://gist.github.com/zehfernandes/427c19c8e7a2672a1d465606910bf679" target="_blank">lite version</a></p>
             </div>
 
             <div class="header-preview">
@@ -72,6 +72,33 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-4721824-19');
+
+  function logClickEvent(category, label) {
+        if (window.ga && ga.create) {
+            //Universal event tracking
+            //https://developers.google.com/analytics/devguides/collection/analyticsjs/events
+            ga('send', 'event', category, 'click', label, {
+                nonInteraction: true
+            });
+        } else if (window._gaq && _gaq._getAsyncTracker) {
+            //classic event tracking
+            //https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide
+            _gaq.push(['_trackEvent', category, 'click', label, 1, true]);
+        } else {
+            console.info('Google analytics not found in this page')
+        }
+    }
+
+    var downloadButton = document.querySelector('#downloadButton')
+    downloadButton.addEventListener("click", function () { 
+        logClickEvent("Download", this.href)
+    }, false)
+
+    var liteVersion = document.querySelector('#liteVersion')
+    liteVersion.addEventListener("click", function () { 
+        logClickEvent("Lite Version", this.href)
+    }, false)
+
 </script>
 
 </html>
