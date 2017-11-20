@@ -28,6 +28,7 @@
     "babel-preset-stage-1": "^6.22.0",
     "decko": "^1.2.0",
     "menubar": "^5.2.3",
+    "node-osascript": "^2.0.0",
     "preact": "^7.2.0",
     "preact-compat": "^3.13.1",
     "webpack": "^2.2.1"

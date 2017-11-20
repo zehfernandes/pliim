@@ -11,7 +11,8 @@ const mb = menubar({
   width: 360,
   height: 320,
   transparent: true,
-  frame: false
+  frame: false,
+  icon: app.getAppPath() + "/img/icon.png"
 });
 
 mb.on("ready", function ready() {
