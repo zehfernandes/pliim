@@ -97,7 +97,7 @@ a:hover {
 
     .header-preview {
         display: flex;
-        flex: 1.5;
+        flex: 1.4;
     }
 }
 
@@ -109,12 +109,12 @@ a:hover {
 .title {
     font-weight: 1rem;
     line-height: 1;
-    margin-bottom: 0.3em;
+    margin-bottom: 0.2em;
 }
 
 .tagline {
     font-size: 1.53rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.3rem;
     max-width: 22ch;
     opacity: 0.8
 }
