@@ -42,12 +42,12 @@ pliimAutoLauncher.enable();
 //minecraftAutoLauncher.disable();
 
 pliimAutoLauncher.isEnabled()
-.then(function(isEnabled){
-  if(isEnabled){
+  .then(function (isEnabled) {
+    if (isEnabled) {
       return;
-  }
-  pliimAutoLauncher.enable();
-})
-.catch(function(err){
+    }
+    pliimAutoLauncher.enable();
+  })
+  .catch(function (err) {
     // handle error
-});
+  });
