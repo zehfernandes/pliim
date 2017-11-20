@@ -6,7 +6,10 @@
   "scripts": {
     "start": "electron .",
     "watch": "webpack --progress --colors --watch",
-    "build": "webpack --production"
+    "pack": "webpack && build --dir",
+    "dist": "webpack && build",
+    "postinstall": "electron-builder install-app-deps",
+    "package-mac": "webpack && electron-packager . --overwrite --platform=darwin --arch=x64 --icon=./app/img/icon.icns --prune=true --out=release-builds"
   },
   "repository": "https://github.com/zehfernandes/pliim",
   "keywords": [
@@ -16,12 +19,49 @@
     "hide"
   ],
   "author": "Zeh Fernandes",
-  "license": "CC0-1.0",
+  "build": {
+    "productName": "Pliim",
+    "asar": false,
+    "files": [
+      "**/*",
+      "!media${/*}"
+    ],
+    "appId": "com.zehfernandes.pliim",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg",
+        "zip",
+        "mas"
+      ],
+      "publish": [
+        "github"
+      ]
+    },
+    "dmg": {
+      "iconSize": 160,
+      "contents": [
+        {
+          "x": 180,
+          "y": 170
+        },
+        {
+          "x": 480,
+          "y": 170,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  },
   "devDependencies": {
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "electron": "^1.4.1"
+    "electron": "^1.4.1",
+    "electron-builder": "^19.8.0",
+    "electron-packager": "^8.7.2"
   },
   "dependencies": {
+    "auto-launch": "^5.0.3",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-preset-react": "^6.22.0",

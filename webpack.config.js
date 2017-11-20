@@ -4,15 +4,15 @@ module.exports = {
   entry: './app/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname)
   },
   target: 'electron',
   module: {
     loaders: [
-      { test: /\.js$/, 
-        exclude: /node_modules/, 
-        loader: "babel-loader" 
-      },
+      { test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader"
+      }
     ]
   },
   "resolve": {

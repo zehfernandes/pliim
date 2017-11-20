@@ -1,5 +1,6 @@
 const { ipcMain, dialog, shell, Menu, app } = require('electron')
 const { turnOff, turnOn } = require('./lib/presentationMode')
+const AutoLaunch = require('auto-launch');
 
 const menubar = require("menubar")
 
@@ -29,4 +30,24 @@ mb.on("ready", function ready() {
   });
 
   //mb.window.openDevTools()
+});
+
+const pliimAutoLauncher = new AutoLaunch({
+  name: 'Pliim',
+  path: '/Applications/Pliim.app',
+});
+
+pliimAutoLauncher.enable();
+
+//minecraftAutoLauncher.disable();
+
+pliimAutoLauncher.isEnabled()
+.then(function(isEnabled){
+  if(isEnabled){
+      return;
+  }
+  pliimAutoLauncher.enable();
+})
+.catch(function(err){
+    // handle error
 });
