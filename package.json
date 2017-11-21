@@ -1,6 +1,6 @@
 {
   "name": "pliim",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "One click to hide desktop icons, turn off notifications and hide active apps",
   "main": "main.js",
   "scripts": {
