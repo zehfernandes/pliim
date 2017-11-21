@@ -8,7 +8,7 @@
 - **[Alfred Workflow](https://cloudup.com/c2m9xTqI_9o)** (by [@danielfilho](https://github.com/danielfilho))
 - **[Lite Version (applescript)](https://gist.github.com/zehfernandes/427c19c8e7a2672a1d465606910bf679)** (macOS only)
 
-<div align="center" markdown="1">
+<div align="left" markdown="1">
 <img src="https://dl.dropboxusercontent.com/s/ml151x32lxhzppw/preview.png?dl=0" alt="Pliim - Presentation mode" width="400">
 </div>
 
