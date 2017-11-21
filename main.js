@@ -1,5 +1,6 @@
 const { ipcMain, dialog, shell, Menu, app } = require('electron')
 const { turnOff, turnOn } = require('./lib/presentationMode')
+const autoUpdater = require('./lib/notifyUpdate.js')
 const AutoLaunch = require('auto-launch');
 
 const menubar = require("menubar")
@@ -13,7 +14,7 @@ const mb = menubar({
   height: 320,
   transparent: true,
   frame: false,
-  icon: app.getAppPath() + "/img/icon.png"
+  icon: app.getAppPath() + "/static/img/icon.png"
 });
 
 mb.on("ready", function ready() {
@@ -27,27 +28,32 @@ mb.on("ready", function ready() {
   ipcMain.on('turnOff', (event) => {
     console.log("Turnoff")
     turnOff(app.getAppPath())
-  });
+  })
 
+  ipcMain.on('install-update', event => {
+    shell.openExternal('https://github.com/zehfernandes/pliim/releases')
+  })
+
+  autoUpdater.init(mb.window)
+
+  mb.showWindow()
   //mb.window.openDevTools()
-});
+})
 
 const pliimAutoLauncher = new AutoLaunch({
   name: 'Pliim',
   path: '/Applications/Pliim.app',
-});
+})
 
 pliimAutoLauncher.enable();
-
-//minecraftAutoLauncher.disable();
 
 pliimAutoLauncher.isEnabled()
   .then(function (isEnabled) {
     if (isEnabled) {
-      return;
+      return
     }
     pliimAutoLauncher.enable();
   })
   .catch(function (err) {
     // handle error
-  });
+  })

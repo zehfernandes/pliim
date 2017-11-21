@@ -29,14 +29,20 @@ export default class App extends Component {
       turnOn: turnOn ? false : true
     })
   }
-  /*
-  _handleToggleClick = () => {
-    //ipcRenderer("turnOff")
-    //ipcRenderer("turnOn", options)
-  }
-  */
 
-  render() {
+  @bind handleInstall(e) {
+    ipcRenderer.send('install-update')
+  }
+
+  componentWillMount() {
+    ipcRenderer.on('update-downloaded', () => {
+      this.setState({
+        notify: true,
+      })
+    })
+  }
+
+  render({ }, { notify }) {
     return (
       <div>
         <div class="arrow"></div>
@@ -57,6 +63,14 @@ export default class App extends Component {
             <li onClick={() => this._handleOptionClick("notification")} class={this.state.options.notification ? "active" : ''}>Disable Notifications</li>
             <li onClick={() => this._handleOptionClick("apps")} class={this.state.options.apps ? "active" : ''}>Hide active apps</li>
           </ul>
+
+          {notify
+            ? <div class="update" onClick={this.handleInstall}>
+              <span class="pr1">🎉</span> New version is available
+              <a href="#" class="">click here to install it</a>
+            </div>
+            : null
+          }
         </div>
       </div>
     );
