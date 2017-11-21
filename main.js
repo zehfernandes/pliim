@@ -36,7 +36,7 @@ mb.on("ready", function ready() {
 
   autoUpdater.init(mb.window)
 
-  mb.showWindow()
+  //mb.showWindow()
   //mb.window.openDevTools()
 })
 
