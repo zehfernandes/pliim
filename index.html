@@ -63,6 +63,24 @@
     </main>
 </body>
 
+<script type="text/javascript">
+  const getLatestRelease = () =>
+    fetch('https://api.github.com/repos/zehfernandes/plim/releases/latest')
+      .then(res => res.json())
+      .then(json => {
+        const asset = json.assets;
+        return { "url": asset[0].browser_download_url, "tag": json.tag_name};
+      });
+
+  const updateButtonUrl = () => {
+    getLatestRelease().then(( { url, tag } ) => {
+      document.getElementById('downloadButton').href = url;
+    });
+  }
+
+  updateButtonUrl();
+</script>
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-4721824-19"></script>
 <script>
