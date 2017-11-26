@@ -57,6 +57,17 @@ mb.on("ready", function ready() {
   })
 })
 
+const isSecondInstance = app.makeSingleInstance((commandLine, workingDirectory) => {
+  // Someone tried to run a second instance, we should focus our window.
+  if (mb.window) {
+    mb.window.show()
+  }
+})
+
+if (isSecondInstance) {
+  app.quit()
+}
+
 const pliimAutoLauncher = new AutoLaunch({
   name: 'Pliim',
   path: '/Applications/Pliim.app',
