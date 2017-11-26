@@ -1,4 +1,10 @@
-# Hide all windows
 tell application "System Events"
-	set visible of every process whose visible is true and background only is false and name is not "Sketch" to false
+	set listOfProcesses to (name of every process where visible is true)
+	# if listOfProcesses contains "Keynote" then tell application "Keynote" to activate
+    # if listOfProcesses contains "Sketch" then tell application "Sketch" to activate
+	repeat with appName in listOfProcesses
+		if {"Sketch", "Keynote"} contains appName then return
+		tell application "Finder" to set visible of process appName to false
+	end repeat
+    listOfProcesses
 end tell
