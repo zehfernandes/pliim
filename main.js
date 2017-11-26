@@ -21,15 +21,18 @@ const mb = menubar({
 });
 
 mb.on("ready", function ready() {
-  console.log("app is ready");
+  console.log("app is ready")
+  tray = mb.tray
 
   ipcMain.on('turnOn', (event, options) => {
     console.log("turnon")
+    tray.setImage(path.join(__dirname, 'static', 'img', 'activeIconTemplate.png'));
     turnOn(options, app.getAppPath())
   });
 
   ipcMain.on('turnOff', (event) => {
     console.log("Turnoff")
+    tray.setImage(path.join(__dirname, 'static', 'img', 'iconTemplate.png'));
     turnOff(app.getAppPath())
   })
 
@@ -39,7 +42,6 @@ mb.on("ready", function ready() {
 
   autoUpdater.init(mb.window)
 
-  //mb.showWindow()
   //mb.window.openDevTools()
 
   mb.window.once('ready-to-show', () => {
@@ -47,7 +49,6 @@ mb.on("ready", function ready() {
       return
     }
 
-    tray = mb.tray
     positioner = mb.positioner
     positioner.move('trayCenter', tray.getBounds())
     mb.window.show()
