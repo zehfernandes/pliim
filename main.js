@@ -8,13 +8,16 @@ const menubar = require("menubar")
 const path = require('path')
 const fs = require('fs')
 
+
+const {wasOpenedAtLogin} = app.getLoginItemSettings();
+
 const mb = menubar({
   preloadWindow: true,
   width: 360,
   height: 320,
   transparent: true,
   frame: false,
-  icon: app.getAppPath() + "/static/img/icon.png"
+  icon: app.getAppPath() + "/static/img/iconTemplate.png"
 });
 
 mb.on("ready", function ready() {
@@ -38,6 +41,19 @@ mb.on("ready", function ready() {
 
   //mb.showWindow()
   //mb.window.openDevTools()
+
+  mb.window.once('ready-to-show', () => {
+    if (wasOpenedAtLogin) {
+      return
+    }
+
+    tray = mb.tray
+    positioner = mb.positioner
+    positioner.move('trayCenter', tray.getBounds())
+    mb.window.show()
+    mb.window.focus()
+    tray.setHighlightMode('always');
+  })
 })
 
 const pliimAutoLauncher = new AutoLaunch({
