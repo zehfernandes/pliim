@@ -18,7 +18,7 @@ const mb = menubar({
   transparent: true,
   frame: false,
   icon: app.getAppPath() + "/static/img/iconTemplate.png"
-});
+})
 
 mb.on("ready", function ready() {
   console.log("app is ready")
@@ -55,7 +55,27 @@ mb.on("ready", function ready() {
     mb.window.focus()
     tray.setHighlightMode('always');
   })
+
+  const contextMenu = Menu.buildFromTemplate ([
+    {role: 'about', label: 'About Pliim' },
+    {label: 'Check for updates', click: () => { shell.openExternal('https://github.com/zehfernandes/pliim/releases/latest') }},
+    {type: 'separator'},
+    {label: 'Quit', click: () => { app.quit () }}
+  ])
+
+  mb.tray.on("click", (event) => {
+    if (event.ctrlKey || event.altKey) {
+      mb.tray.popUpContextMenu (contextMenu)
+    }
+  })
+
+  mb.tray.on("right-click", (event) => {
+    mb.tray.popUpContextMenu(contextMenu)
+  })
+
 })
+
+
 
 const isSecondInstance = app.makeSingleInstance((commandLine, workingDirectory) => {
   // Someone tried to run a second instance, we should focus our window.
