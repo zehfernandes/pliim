@@ -1,15 +1,15 @@
-const { ipcMain, dialog, shell, Menu, app } = require('electron')
-const { turnOff, turnOn } = require('./lib/presentationMode')
-const autoUpdater = require('./lib/notifyUpdate.js')
+// Pliim
+
+const path = require('path');
+
+const { Menu, ipcMain, shell, app } = require('electron');
 const AutoLaunch = require('auto-launch');
+const menubar = require('menubar');
 
-const menubar = require("menubar")
+const { turnOff, turnOn } = require('./lib/presentationMode');
+const autoUpdater = require('./lib/notifyUpdate.js');
 
-const path = require('path')
-const fs = require('fs')
-
-
-const {wasOpenedAtLogin} = app.getLoginItemSettings();
+const { wasOpenedAtLogin } = app.getLoginItemSettings();
 
 const mb = menubar({
   preloadWindow: true,
@@ -17,91 +17,100 @@ const mb = menubar({
   height: 320,
   transparent: true,
   frame: false,
-  icon: app.getAppPath() + "/static/img/iconTemplate.png"
-})
+  icon: path.join(__dirname, 'static', 'img', 'iconTemplate.png')
+});
 
-mb.on("ready", function ready() {
-  console.log("app is ready")
-  tray = mb.tray
+mb.on('ready', () => {
+  const tray = mb.tray;
 
   ipcMain.on('turnOn', (event, options) => {
-    console.log("turnon")
     tray.setImage(path.join(__dirname, 'static', 'img', 'activeIconTemplate.png'));
-    turnOn(options, app.getAppPath())
+
+    turnOn(options, app.getAppPath());
   });
 
-  ipcMain.on('turnOff', (event) => {
-    console.log("Turnoff")
+  ipcMain.on('turnOff', () => {
     tray.setImage(path.join(__dirname, 'static', 'img', 'iconTemplate.png'));
-    turnOff(app.getAppPath())
-  })
+
+    turnOff(app.getAppPath());
+  });
 
   ipcMain.on('install-update', event => {
-    shell.openExternal('https://github.com/zehfernandes/pliim/releases')
-  })
+    if (event === 'install-update') {
+      shell.openExternal('https://github.com/zehfernandes/pliim/releases');
+    }
+  });
 
-  autoUpdater.init(mb.window)
-
-  //mb.window.openDevTools()
+  autoUpdater.init(mb.window);
 
   mb.window.once('ready-to-show', () => {
     if (wasOpenedAtLogin) {
-      return
+      return;
     }
 
-    positioner = mb.positioner
-    positioner.move('trayCenter', tray.getBounds())
-    mb.window.show()
-    mb.window.focus()
+    const positioner = mb.positioner;
+    positioner.move('trayCenter', tray.getBounds());
+
+    mb.window.show();
+    mb.window.focus();
+
     tray.setHighlightMode('always');
-  })
+  });
 
-  const contextMenu = Menu.buildFromTemplate ([
-    {role: 'about', label: 'About Pliim' },
-    {label: 'Check for updates', click: () => { shell.openExternal('https://github.com/zehfernandes/pliim/releases/latest') }},
-    {type: 'separator'},
-    {label: 'Quit', click: () => { app.quit () }}
-  ])
-
-  mb.tray.on("click", (event) => {
-    if (event.ctrlKey || event.altKey) {
-      mb.tray.popUpContextMenu (contextMenu)
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      role: 'about',
+      label: 'About Pliim'
+    }, {
+      label: 'Check for updates',
+      click: () => {
+        shell.openExternal('https://github.com/zehfernandes/pliim/releases/latest');
+      }
+    }, {
+      type: 'separator'
+    }, {
+      label: 'Quit',
+      click: () => {
+        app.quit();
+      }
     }
-  })
+  ]);
 
-  mb.tray.on("right-click", (event) => {
-    mb.tray.popUpContextMenu(contextMenu)
-  })
+  mb.tray.on('click', event => {
+    if (event.ctrlKey || event.altKey) {
+      mb.tray.popUpContextMenu(contextMenu);
+    }
+  });
 
-})
+  mb.tray.on('right-click', () => {
+    mb.tray.popUpContextMenu(contextMenu);
+  });
+});
 
-
-
-const isSecondInstance = app.makeSingleInstance((commandLine, workingDirectory) => {
+const isSecondInstance = app.makeSingleInstance(() => {
   // Someone tried to run a second instance, we should focus our window.
   if (mb.window) {
-    mb.window.show()
+    mb.window.show();
   }
-})
+});
 
 if (isSecondInstance) {
-  app.quit()
+  app.quit();
 }
 
 const pliimAutoLauncher = new AutoLaunch({
   name: 'Pliim',
-  path: '/Applications/Pliim.app',
-})
+  path: '/Applications/Pliim.app'
+});
 
 pliimAutoLauncher.enable();
 
-pliimAutoLauncher.isEnabled()
-  .then(function (isEnabled) {
-    if (isEnabled) {
-      return
-    }
-    pliimAutoLauncher.enable();
-  })
-  .catch(function (err) {
-    // handle error
-  })
+pliimAutoLauncher.isEnabled().then(isEnabled => {
+  if (isEnabled) {
+    return;
+  }
+
+  pliimAutoLauncher.enable();
+}).catch(err => {
+  console.error(err);
+});

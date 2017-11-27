@@ -2,7 +2,7 @@ html,
 body {
   background: transparent;
   color: #767676;
-  font-family: "Helvetica Neue"
+  font-family: "Helvetica Neue";
 }
 
 .window {
@@ -21,7 +21,7 @@ body {
   border-bottom: 15px solid #E8E8E8;
   position: absolute;
   left: 50%;
-  margin-left: -13px
+  margin-left: -13px;
 }
 
 .main-action {
@@ -32,7 +32,7 @@ body {
 h2 {
   font-size: 20px;
   font-weight: 500;
-  letter-spacing: 0.02em
+  letter-spacing: 0.02em;
 }
 
 .options {
@@ -45,7 +45,7 @@ h2 {
   padding: 9px 0 9px 0;
   letter-spacing: 0.02em;
   font-size: 14px;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .options li:hover {
@@ -58,7 +58,7 @@ h2 {
 }
 
 .main-action {
-  display: flex
+  display: flex;
 }
 
 .main-action h2 {
@@ -90,13 +90,13 @@ h2 {
 }
 
 input[type="checkbox"] {
-    position: absolute;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    width: 1px;
-    margin: -1px;
-    padding: 0;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
 }
 
 input[type="checkbox"] + label {
@@ -111,6 +111,7 @@ input[type="checkbox"] + label {
   -webkit-transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
   transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
 }
+
 input[type="checkbox"] + label:before {
   content: '';
   position: absolute;
@@ -124,8 +125,9 @@ input[type="checkbox"] + label:before {
   -webkit-transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9) 0.1s;
   transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9) 0.1s;
   -webkit-transform: translateZ(0) scale(0);
-          transform: translateZ(0) scale(0);
+  transform: translateZ(0) scale(0);
 }
+
 input[type="checkbox"] + label:after {
   content: '';
   position: absolute;
@@ -140,13 +142,15 @@ input[type="checkbox"] + label:after {
   -webkit-transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
   transition: all 0.3s cubic-bezier(1, 0.1, 0, 0.9);
   -webkit-transform: translateZ(0) translateX(0);
-          transform: translateZ(0) translateX(0);
+  transform: translateZ(0) translateX(0);
 }
+
 input[type="checkbox"]:checked + label {
   background: #853DC3;
 }
+
 input[type="checkbox"]:checked + label:after {
   left: calc(100% - 28px);
   -webkit-transform: translateZ(0);
-          transform: translateZ(0);
+  transform: translateZ(0);
 }
