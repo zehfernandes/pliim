@@ -1,3 +1,3 @@
 # Mute
 
-set Volume 0
+set volume with output muted

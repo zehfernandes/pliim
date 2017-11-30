@@ -10,4 +10,4 @@ tell application "System Events"
 end tell
 
 # Unmute
-set Volume 100
+set volume without output muted
