@@ -8,3 +8,6 @@ do shell script "defaults write com.apple.finder CreateDesktop -bool true; killa
 tell application "System Events"
 	set visible of (every process) to true
 end tell
+
+# Unmute
+set volume without output muted

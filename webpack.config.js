@@ -1,24 +1,27 @@
-var path = require('path');
+// Pliim
+
+const { resolve } = require('path');
 
 module.exports = {
   entry: './app/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname)
+    path: resolve(__dirname)
   },
   target: 'electron',
   module: {
     loaders: [
-      { test: /\.js$/,
+      {
+        test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
+        loader: 'babel-loader'
       }
     ]
   },
-  "resolve": {
-    "alias": {
-      "react": "preact-compat",
-      "react-dom": "preact-compat"
+  resolve: {
+    alias: {
+      react: 'preact-compat',
+      'react-dom': 'preact-compat'
     }
   }
 };

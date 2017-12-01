@@ -15,13 +15,12 @@
 ## Future tasks
 
 - [ ] Linux Version 
-- [ ] Mute speakers
 - [ ] Disable night shift
 - [ ] Avoid display turn off
 
 ## Contribute
 
-- `yarn install` Install dependencies.
-- `yarn watch` Compile development version and watch for changes. Bundled files will appear in `dist/`.
-- `yarn start` Start the desktop app (while watcher is running in another terminal). Use Ctrl-R or Cmd-R to reload the app.
-- `yarn run pack` Pack to app distribute version
+- `yarn install` (`npm install`) Install dependencies.
+- `yarn watch` (`npm run watch`) Compile development version and watch for changes. Bundled files will appear in `dist/`.
+- `yarn start` (`npm start`) Start the desktop app (while watcher is running in another terminal). Use Ctrl-R or Cmd-R to reload the app.
+- `yarn run pack` (`npm run pack`) Pack to app distribute version
