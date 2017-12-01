@@ -82,7 +82,7 @@ export default class App extends Component {
               Hide active apps
             </li>
             <li onClick={ () => this._handleOptionClick('mute') } class={ this.state.options.mute ? 'active' : '' }>
-              Mute
+              Mute speakers
             </li>
           </ul>
 
