@@ -14,9 +14,13 @@
 
 ## Future tasks
 
-- [ ] Linux Version 
+- [ ] Linux Version
 - [ ] Disable night shift
 - [ ] Avoid display turn off
+- [ ] Save user preferences
+- [ ] Change wallpaper
+- [ ] Hide dock
+- [ ] Back any default configuration
 
 ## Contribute
 
