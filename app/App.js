@@ -1,8 +1,8 @@
 // Pliim
 
-import { ipcRenderer } from 'electron';
-import { bind } from 'decko';
-import { h, Component } from 'preact'; // eslint-disable-line no-unused-vars
+import { ipcRenderer } from "electron";
+import { bind } from "decko";
+import { h, Component } from "preact"; // eslint-disable-line no-unused-vars
 
 export default class App extends Component {
   state = {
@@ -11,7 +11,8 @@ export default class App extends Component {
       desktop: true,
       notification: true,
       apps: true,
-      mute: true
+      mute: false,
+      wallpaper: false
     }
   };
 
@@ -21,6 +22,7 @@ export default class App extends Component {
 
     options[opt] = options[opt] ? false : true;
 
+    ipcRenderer.send("storeConfig", options);
     this.setState({
       options
     });
@@ -31,9 +33,9 @@ export default class App extends Component {
     const turnOn = this.state.turnOn;
 
     if (turnOn) {
-      ipcRenderer.send('turnOff');
+      ipcRenderer.send("turnOff");
     } else {
-      ipcRenderer.send('turnOn', this.state.options);
+      ipcRenderer.send("turnOn", this.state.options);
     }
 
     this.setState({
@@ -43,13 +45,21 @@ export default class App extends Component {
 
   @bind
   _handleInstall() {
-    ipcRenderer.send('install-update');
+    ipcRenderer.send("install-update");
   }
 
   componentWillMount() {
-    ipcRenderer.on('update-downloaded', () => {
+    ipcRenderer.on("update-downloaded", () => {
       this.setState({
         notify: true
+      });
+    });
+
+    ipcRenderer.send("getConfig");
+    ipcRenderer.on("listeningConfigs", (store, options) => {
+      console.log(options);
+      this.setState({
+        options
       });
     });
   }
@@ -57,7 +67,7 @@ export default class App extends Component {
   render({}, { notify }) {
     return (
       <div>
-        <div class="arrow"></div>
+        <div class="arrow" />
 
         <div class="window">
           <section class="main-action">
@@ -65,35 +75,59 @@ export default class App extends Component {
 
             <div class="toggle">
               <div class="row">
-                <input type="checkbox" name="fancy-checkbox" id="fancy-checkbox" />
-                <label onClick={ this._handleToggleClick } for="fancy-checkbox">Checkbox</label>
+                <input
+                  type="checkbox"
+                  name="fancy-checkbox"
+                  id="fancy-checkbox"
+                />
+                <label onClick={this._handleToggleClick} for="fancy-checkbox">
+                  Checkbox
+                </label>
               </div>
             </div>
           </section>
 
           <ul class="options">
-            <li onClick={ () => this._handleOptionClick('desktop') } class={ this.state.options.desktop ? 'active' : '' }>
-              Hide Desktop icons
+            <li
+              onClick={() => this._handleOptionClick("desktop")}
+              class={this.state.options.desktop ? "active" : ""}
+            >
+              Hide desktop icons
             </li>
-            <li onClick={ () => this._handleOptionClick('notification') } class={ this.state.options.notification ? 'active' : '' }>
-              Disable Notifications
+            <li
+              onClick={() => this._handleOptionClick("notification")}
+              class={this.state.options.notification ? "active" : ""}
+            >
+              Disable notifications
             </li>
-            <li onClick={ () => this._handleOptionClick('apps') } class={ this.state.options.apps ? 'active' : '' }>
+            <li
+              onClick={() => this._handleOptionClick("apps")}
+              class={this.state.options.apps ? "active" : ""}
+            >
               Hide active apps
             </li>
-            <li onClick={ () => this._handleOptionClick('mute') } class={ this.state.options.mute ? 'active' : '' }>
+            <li
+              onClick={() => this._handleOptionClick("mute")}
+              class={this.state.options.mute ? "active" : ""}
+            >
               Mute speakers
+            </li>
+            <li
+              onClick={() => this._handleOptionClick("wallpaper")}
+              class={this.state.options.wallpaper ? "active" : ""}
+            >
+              Change wallpaper
             </li>
           </ul>
 
-          {
-            notify ?
-              <div class="update" onClick={ this._handleInstall }>
-                <span class="pr1">🎉</span> New version is available
-                <a href="#" class="">click here to install it</a>
-              </div> :
-              null
-          }
+          {notify ? (
+            <div class="update" onClick={this._handleInstall}>
+              <span class="pr1">🎉</span> New version is available
+              <a href="#" class="">
+                click here to install it
+              </a>
+            </div>
+          ) : null}
         </div>
       </div>
     );
