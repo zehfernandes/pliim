@@ -1,8 +1,7 @@
 // Pliim
 
 const path = require("path");
-
-const { Menu, ipcMain, shell, app } = require("electron");
+const { BrowserWindow, Menu, ipcMain, shell, app } = require("electron");
 const AutoLaunch = require("auto-launch");
 const menubar = require("menubar");
 
@@ -22,6 +21,8 @@ const mb = menubar({
   frame: false,
   icon: path.join(__dirname, "static", "img", "iconTemplate.png")
 });
+
+let prefsWindow;
 
 mb.on("ready", () => {
   const tray = mb.tray;
@@ -75,7 +76,38 @@ mb.on("ready", () => {
     tray.setHighlightMode("always");
   });
 
-  /* Menu */
+  /* -----------
+Preference Window
+------------ */
+  const openPrefsWindow = () => {
+    if (prefsWindow) {
+      return prefsWindow.show();
+    }
+
+    prefsWindow = new BrowserWindow({
+      width: 480,
+      height: 480,
+      resizable: false,
+      minimizable: false,
+      maximizable: false,
+      //titleBarStyle: "hidden",
+      show: false
+    });
+
+    prefsWindow.on("close", () => {
+      prefsWindow = undefined;
+    });
+
+    prefsWindow.loadURL(`file://${__dirname}/preferences.html`);
+    prefsWindow.on("ready-to-show", () => {
+      prefsWindow.show();
+    });
+  };
+
+  /* -----------
+    Menu
+  ------------ */
+
   const contextMenu = Menu.buildFromTemplate([
     {
       role: "about",
@@ -87,6 +119,12 @@ mb.on("ready", () => {
         shell.openExternal(
           "https://github.com/zehfernandes/pliim/releases/latest"
         );
+      }
+    },
+    {
+      label: "Preferences",
+      click: () => {
+        openPrefsWindow();
       }
     },
     {
@@ -111,6 +149,10 @@ mb.on("ready", () => {
   });
 });
 
+/* -----------
+Second Instance
+------------ */
+
 const isSecondInstance = app.makeSingleInstance(() => {
   // Someone tried to run a second instance, we should focus our window.
   if (mb.window) {
@@ -121,6 +163,10 @@ const isSecondInstance = app.makeSingleInstance(() => {
 if (isSecondInstance) {
   app.quit();
 }
+
+/* -----------
+Auto-Laucher
+------------ */
 
 const pliimAutoLauncher = new AutoLaunch({
   name: "Pliim",

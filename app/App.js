@@ -1,8 +1,7 @@
 // Pliim
-
 import { ipcRenderer } from "electron";
 import { bind } from "decko";
-import { h, Component } from "preact"; // eslint-disable-line no-unused-vars
+import { h, Component, render } from "preact"; // eslint-disable-line no-unused-vars
 
 export default class App extends Component {
   state = {
@@ -133,3 +132,5 @@ export default class App extends Component {
     );
   }
 }
+
+render(<App />, document.body);
