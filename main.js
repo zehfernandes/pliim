@@ -85,8 +85,8 @@ Preference Window
     }
 
     prefsWindow = new BrowserWindow({
-      width: 480,
-      height: 480,
+      width: 400,
+      height: 400,
       resizable: false,
       minimizable: false,
       maximizable: false,
@@ -103,6 +103,8 @@ Preference Window
       prefsWindow.show();
     });
   };
+
+  ipcMain.on("getConfig", (event, options) => {});
 
   /* -----------
     Menu
@@ -168,12 +170,27 @@ if (isSecondInstance) {
 Auto-Laucher
 ------------ */
 
+function toogleAutoLauch() {
+  const autoLaucher = store.get("laucher");
+  if (autoLaucher || autoLaucher === true) {
+    pliimAutoLauncher.enable();
+  } else {
+    pliimAutoLauncher.disable();
+  }
+}
+
 const pliimAutoLauncher = new AutoLaunch({
   name: "Pliim",
   path: "/Applications/Pliim.app"
 });
 
-pliimAutoLauncher.enable();
+const autoLaucher = store.get("laucher");
+
+if (autoLaucher || autoLaucher === true) {
+  pliimAutoLauncher.enable();
+} else {
+  pliimAutoLauncher.disable();
+}
 
 pliimAutoLauncher
   .isEnabled()
@@ -181,8 +198,6 @@ pliimAutoLauncher
     if (isEnabled) {
       return;
     }
-
-    pliimAutoLauncher.enable();
   })
   .catch(err => {
     console.error(err);
