@@ -1,8 +1,7 @@
 {
   "name": "pliim",
   "version": "1.5.0",
-  "description":
-    "One click to hide desktop icons, turn off notifications and hide active apps",
+  "description": "One click to hide desktop icons, turn off notifications and hide active apps",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -11,21 +10,34 @@
     "dist": "webpack && build",
     "lint": "xo",
     "postinstall": "electron-builder install-app-deps",
-    "package-mac":
-      "webpack && electron-packager . --overwrite --platform=darwin --arch=x64 --icon=./app/img/icon.icns --prune=true --out=release-builds"
+    "package-mac": "webpack && electron-packager . --overwrite --platform=darwin --arch=x64 --icon=./app/img/icon.icns --prune=true --out=release-builds"
   },
   "repository": "https://github.com/zehfernandes/pliim",
-  "keywords": ["Electron", "presentation", "notifications", "hide"],
+  "keywords": [
+    "Electron",
+    "presentation",
+    "notifications",
+    "hide"
+  ],
   "author": "Zeh Fernandes",
   "build": {
     "productName": "Pliim",
     "asar": false,
-    "files": ["**/*", "!media${/*}"],
+    "files": [
+      "**/*",
+      "!media${/*}"
+    ],
     "appId": "com.zehfernandes.pliim",
     "mac": {
       "category": "public.app-category.productivity",
-      "target": ["dmg", "zip", "mas"],
-      "publish": ["github"]
+      "target": [
+        "dmg",
+        "zip",
+        "mas"
+      ],
+      "publish": [
+        "github"
+      ]
     },
     "dmg": {
       "iconSize": 160,
@@ -69,9 +81,20 @@
   "xo": {
     "esnext": true,
     "extends": [],
-    "extensions": ["js", "jsx"],
-    "env": ["node"],
-    "globals": ["document", "Menu", "path", "tray", "positioner"],
+    "extensions": [
+      "js",
+      "jsx"
+    ],
+    "env": [
+      "node"
+    ],
+    "globals": [
+      "document",
+      "Menu",
+      "path",
+      "tray",
+      "positioner"
+    ],
     "parser": "babel-eslint",
     "rules": {
       "import/extensions": 0,
