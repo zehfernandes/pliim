@@ -9,7 +9,7 @@
 - **[Lite Version (applescript)](https://gist.github.com/zehfernandes/427c19c8e7a2672a1d465606910bf679)** (macOS only)
 
 <div align="left" markdown="1">
-<img src="https://www.dropbox.com/s/dr575k2dryvqmdv/pliimpreview.png?raw=1" alt="Pliim - Presentation mode" width="400">
+<img src="https://www.dropbox.com/s/dr575k2dryvqmdv/pliimpreview.png?raw=1" alt="Pliim - Presentation mode" width="500">
 </div>
 
 ## Contribute
@@ -21,5 +21,4 @@
 
 ## Buy me a coffe ☕️
 
-Even a small donation from your side is important. This is really motivating me spend more time doing open source.
-[Buy me a coffee ✨](https://www.buymeacoffee.com/zehfernandes)
+Even a small donation from your side is important. This is really motivating me spend more time doing open source.<br/> [Buy me a coffee ✨](https://www.buymeacoffee.com/zehfernandes)
