@@ -1,5 +1,5 @@
 <div align="center" markdown="1">
-<img src="https://dl.dropboxusercontent.com/s/8x4u8bm584dhnnp/readme-image.png" alt="Pliim - Presentation mode" width="400">
+<img src="https://www.dropbox.com/s/dr575k2dryvqmdv/pliimpreview.png?raw=1" alt="Pliim - Presentation mode" width="400">
 </div>
 
 ## Get Pliim
@@ -12,19 +12,13 @@
 <img src="https://dl.dropboxusercontent.com/s/ml151x32lxhzppw/preview.png?dl=0" alt="Pliim - Presentation mode" width="400">
 </div>
 
-## Future tasks
-
-- [ ] Linux Version
-- [ ] Disable night shift
-- [ ] Avoid display turn off
-- [ ] Save user preferences
-- [ ] Change wallpaper
-- [ ] Hide dock
-- [ ] Back any default configuration
-
 ## Contribute
 
 - `yarn install` (`npm install`) Install dependencies.
 - `yarn watch` (`npm run watch`) Compile development version and watch for changes. Bundled files will appear in `dist/`.
 - `yarn start` (`npm start`) Start the desktop app (while watcher is running in another terminal). Use Ctrl-R or Cmd-R to reload the app.
 - `yarn run pack` (`npm run pack`) Pack to app distribute version
+
+## Buy me a coffe ☕️
+
+Even a small donation from your side is important. This is really motivating me spend more time doing open source. [Buy me a coffee](https://www.buymeacoffee.com/zehfernandes)
