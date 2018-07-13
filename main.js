@@ -1,7 +1,14 @@
 // Pliim
 
 const path = require("path");
-const { BrowserWindow, Menu, ipcMain, shell, app } = require("electron");
+const {
+  BrowserWindow,
+  Menu,
+  ipcMain,
+  shell,
+  dialog,
+  app
+} = require("electron");
 const AutoLaunch = require("auto-launch");
 const menubar = require("menubar");
 
@@ -59,8 +66,30 @@ mb.on("ready", () => {
     if (configs) event.sender.send("listeningConfigs", configs);
   });
 
-  autoUpdater.init(mb.window);
+  /* Preferences */
+  ipcMain.on("set-laucher", (event, value) => {
+    store.set("launcher", value);
+  });
 
+  ipcMain.on("choose-wallpaper", (event, value) => {
+    dialog.showOpenDialog(
+      mb.window,
+      {
+        title: "Select your wallpaper",
+        properties: ["openFile"],
+        filters: [{ name: "Images", extensions: ["jpg", "png", "gif"] }]
+      },
+      function(filePath) {
+        if (filePath !== undefined) {
+          console.log(filePath);
+          store.set("selectedWallpaper", filePath);
+        }
+      }
+    );
+  });
+
+  /* Start */
+  autoUpdater.init(mb.window);
   mb.window.once("ready-to-show", () => {
     if (wasOpenedAtLogin) {
       return;
@@ -103,8 +132,6 @@ Preference Window
       prefsWindow.show();
     });
   };
-
-  ipcMain.on("getConfig", (event, options) => {});
 
   /* -----------
     Menu
@@ -170,23 +197,14 @@ if (isSecondInstance) {
 Auto-Laucher
 ------------ */
 
-function toogleAutoLauch() {
-  const autoLaucher = store.get("laucher");
-  if (autoLaucher || autoLaucher === true) {
-    pliimAutoLauncher.enable();
-  } else {
-    pliimAutoLauncher.disable();
-  }
-}
-
 const pliimAutoLauncher = new AutoLaunch({
   name: "Pliim",
   path: "/Applications/Pliim.app"
 });
 
-const autoLaucher = store.get("laucher");
+const autoLauncher = store.get("launcher");
 
-if (autoLaucher || autoLaucher === true) {
+if (autoLauncher || autoLauncher === true) {
   pliimAutoLauncher.enable();
 } else {
   pliimAutoLauncher.disable();
