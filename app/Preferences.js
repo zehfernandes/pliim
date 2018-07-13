@@ -26,6 +26,20 @@ export default class Preferences extends Component {
     ipcRenderer.send("choose-wallpaper");
   }
 
+  componentWillMount() {
+    ipcRenderer.send("getPreferences");
+    ipcRenderer.on("listeningPreferences", (store, options) => {
+      this.setState({
+        wallPaper:
+          options.wallPaper != null ? options.wallPaper : this.state.wallPaper,
+        autoLaucher:
+          options.autoLaucher != null
+            ? options.autoLaucher
+            : this.state.autoLaucher
+      });
+    });
+  }
+
   render({}, { notify }) {
     return (
       <div>

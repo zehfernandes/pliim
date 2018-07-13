@@ -20,10 +20,12 @@ const { wasOpenedAtLogin } = app.getLoginItemSettings();
 const Store = require("electron-store");
 const store = new Store();
 
+store.delete("selectedWallpaper");
+
 const mb = menubar({
   preloadWindow: true,
   width: 360,
-  height: 320,
+  height: 340,
   transparent: true,
   frame: false,
   icon: path.join(__dirname, "static", "img", "iconTemplate.png")
@@ -67,13 +69,20 @@ mb.on("ready", () => {
   });
 
   /* Preferences */
+  ipcMain.on("getPreferences", (event, options) => {
+    event.sender.send("listeningPreferences", {
+      autoLaucher: store.get("launcher"),
+      wallPaper: store.get("selectedWallpaper")
+    });
+  });
+
   ipcMain.on("set-laucher", (event, value) => {
     store.set("launcher", value);
   });
 
   ipcMain.on("choose-wallpaper", (event, value) => {
     dialog.showOpenDialog(
-      mb.window,
+      prefsWindow,
       {
         title: "Select your wallpaper",
         properties: ["openFile"],
@@ -82,7 +91,10 @@ mb.on("ready", () => {
       function(filePath) {
         if (filePath !== undefined) {
           console.log(filePath);
-          store.set("selectedWallpaper", filePath);
+          store.set("selectedWallpaper", filePath[0]);
+          event.sender.send("listeningPreferences", {
+            wallPaper: filePath[0]
+          });
         }
       }
     );
@@ -106,8 +118,8 @@ mb.on("ready", () => {
   });
 
   /* -----------
-Preference Window
------------- */
+  Preference Window
+  ------------ */
   const openPrefsWindow = () => {
     if (prefsWindow) {
       return prefsWindow.show();
