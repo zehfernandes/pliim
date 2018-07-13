@@ -1,5 +1,5 @@
 <div align="center" markdown="1">
-<img src="https://www.dropbox.com/s/dr575k2dryvqmdv/pliimpreview.png?raw=1" alt="Pliim - Presentation mode" width="400">
+<img src="https://dl.dropboxusercontent.com/s/8x4u8bm584dhnnp/readme-image.png" alt="Pliim - Presentation mode" width="400">
 </div>
 
 ## Get Pliim
@@ -9,7 +9,7 @@
 - **[Lite Version (applescript)](https://gist.github.com/zehfernandes/427c19c8e7a2672a1d465606910bf679)** (macOS only)
 
 <div align="left" markdown="1">
-<img src="https://dl.dropboxusercontent.com/s/ml151x32lxhzppw/preview.png?dl=0" alt="Pliim - Presentation mode" width="400">
+<img src="https://www.dropbox.com/s/dr575k2dryvqmdv/pliimpreview.png?raw=1" alt="Pliim - Presentation mode" width="400">
 </div>
 
 ## Contribute
