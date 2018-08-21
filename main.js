@@ -216,7 +216,7 @@ const pliimAutoLauncher = new AutoLaunch({
 
 const autoLauncher = store.get("launcher");
 
-if (autoLauncher || autoLauncher === true) {
+if (!autoLauncher || autoLauncher === true) {
   pliimAutoLauncher.enable();
 } else {
   pliimAutoLauncher.disable();
