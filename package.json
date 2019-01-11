@@ -1,6 +1,6 @@
 {
   "name": "pliim",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "One click to hide desktop icons, turn off notifications and hide active apps",
   "main": "main.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "dist": "webpack && build",
     "lint": "xo",
     "postinstall": "electron-builder install-app-deps",
-    "package-mac": "webpack && electron-packager . --overwrite --platform=darwin --arch=x64 --icon=./app/img/icon.icns --prune=true --out=release-builds"
+    "package-mac": "webpack && electron-packager . --overwrite --platform=darwin --arch=x64 --icon=./build/icon.icns --prune=true --out=release-builds"
   },
   "repository": "https://github.com/zehfernandes/pliim",
   "keywords": [
@@ -72,9 +72,10 @@
     "decko": "^1.2.0",
     "electron-store": "^1.3.0",
     "menubar": "^5.2.3",
-    "node-osascript": "^2.0.0",
-    "preact": "^8.2.6",
-    "preact-compat": "^3.13.1",
+    "node-gyp": "^3.8.0",
+    "node-osascript": "^2.1.0",
+    "preact": "^8.4.1",
+    "preact-compat": "^3.18.4",
     "util.promisify": "^1.0.0",
     "webpack": "^3.8.1"
   },
