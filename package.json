@@ -5,12 +5,13 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "build": "electron-builder",
     "watch": "webpack --progress --colors --watch",
     "pack": "webpack && build --dir",
     "dist": "webpack && build",
     "lint": "xo",
     "postinstall": "electron-builder install-app-deps",
-    "package-mac": "webpack && electron-packager . --overwrite --platform=darwin --arch=x64 --icon=./build/icon.icns --prune=true --out=release-builds"
+    "package-mac": "webpack && electron-packager . Pliim --overwrite --platform=darwin --arch=x64 --icon=./build/icon.icns --prune=true --out=release-builds"
   },
   "repository": "https://github.com/zehfernandes/pliim",
   "keywords": [
