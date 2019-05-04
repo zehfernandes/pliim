@@ -11,9 +11,9 @@ module.exports = {
     filename: "[name].js",
     path: resolve(__dirname)
   },
-  target: "electron",
+  target: "electron-main",
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
