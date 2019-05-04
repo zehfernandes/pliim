@@ -9,7 +9,7 @@
 - **[Lite Version (applescript)](https://gist.github.com/zehfernandes/427c19c8e7a2672a1d465606910bf679)** (macOS only)
 
 <div align="left" markdown="1">
-<img src="https://www.dropbox.com/s/dr575k2dryvqmdv/pliimpreview.png?raw=1" alt="Pliim - Presentation mode" width="500">
+<img src="https://www.dropbox.com/s/ml151x32lxhzppw/preview.png?raw=1" alt="Pliim - Presentation mode" width="500">
 </div>
 
 ## Contribute
