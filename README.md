@@ -21,4 +21,4 @@
 
 ## Buy me a coffee ☕️
 
-Even a small donation from your side is important. This is really motivating me spend more time doing open source.
+Even a small donation from your side is important. This is really motivating me spend more time doing open source. [Buy me a coffee](https://github.com/sponsors/zehfernandes?frequency=one-time&sponsor=zehfernandes)
